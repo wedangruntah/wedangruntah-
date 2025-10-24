@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wedang Runtah</title>
+  <style>
+    body { 
+      margin: 0;
+      font-family: 'Poppins', Arial, sans-serif;
+      background: #f8faff;
+      color: #333;
+      transition: background 0.5s;
+    }
+
+    h1, h2, h3 { color: #1a237e; font-weight: 600; }
+    p, li { line-height: 1.6; }
+
+    header {
+      text-align: center;
+      padding: 60px 20px 40px;
+      background: linear-gradient(135deg, #304ffe, #3d5afe);
+      color: white;
+      border-bottom-left-radius: 30px;
+      border-bottom-right-radius: 30px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      background: transparent;
+      margin-top: -20px;
+      z-index: 10;
+      position: relative;
+    }
+
+    nav a {
+      padding: 10px 18px;
+      background: white;
+      color: #1a237e;
+      text-decoration: none;
+      border-radius: 25px;
+      font-weight: 500;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      transition: all 0.3s;
+    }
+
+    nav a:hover {
+      background: #1a237e;
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    section {
+      padding: 40px 20px 60px;
+      max-width: 900px;
+      margin: auto;
+      position: relative;
+    }
+
+    .content {
+      background: white;
+      padding: 35px;
+      border-radius: 16px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(20px);
+      transition: all 0.6s ease;
+      position: absolute;
+      width: 100%;
+      top: 0;
+      left: 0;
+    }
+
+    .active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      position: relative;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      border-radius: 12px;
+      margin-top: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 15px;
+      margin-top: 25px;
+    }
+
+    .gallery img {
+      border-radius: 10px;
+      width: 100%;
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+    }
+
+    .popup {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      visibility: hidden;
+      opacity: 0;
+      transition: all 0.3s ease;
+      z-index: 9999;
+    }
+
+    .popup.active {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .popup img {
+      max-width: 90%;
+      max-height: 80%;
+      border-radius: 12px;
+      box-shadow: 0 5px 20px rgba(255,255,255,0.3);
+      animation: fadeIn 0.4s ease;
+    }
+
+    .popup span {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: white;
+      font-size: 2em;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .popup span:hover {
+      color: #ff5252;
+      transform: scale(1.1);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @media (max-width: 768px) {
+      header h1 { font-size: 1.8em; }
+      nav a { font-size: 0.9em; padding: 8px 14px; }
+      section { padding: 25px 15px; }
+      .content { padding: 25px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <h1>Wedang Runtah</h1>
+    <p>Hangat • Sehat • Tradisional</p>
+  </header>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <a onclick="showPage('home')">Home</a>
+    <a onclick="showPage('tentang')">Tentang</a>
+    <a onclick="showPage('resep')">Resep</a>
+    <a onclick="showPage('sejarah')">Sejarah</a>
+    <a onclick="showPage('kelompok')">Kelompok</a>
+    <a onclick="showPage('dokumentasi')">Dokumentasi</a>
+    <a onclick="showPage('lokasi')">Lokasi</a>
+  </nav>
+
+  <!-- SECTION -->
+  <section>
+    <div id="home" class="content active">
+      <h2>Selamat Datang</h2>
+      <p>Wedang Runtah adalah minuman tradisional khas Tegal yang kaya akan rempah dan manfaat bagi kesehatan.</p>
+      <img src="home.jpg" alt="Wedang Runtah Hangat">
+    </div>
+
+    <div id="tentang" class="content">
+      <h2>Tentang Wedang Runtah</h2>
+      <p>Wedang runtah adalah minuman rempah hangat khas Tegal yang terdiri dari campuran beberapa bahan rempah dan pemanis alami, direbus bersama sehingga menghasilkan minuman beraroma kuat, hangat, dan menenangkan. Kata wedang berarti minuman hangat; istilah runtah di sini mengacu pada “campuran” atau sisa-sisa rempah yang masih berguna — bukan bermakna kotor — sehingga esensi minuman ini adalah kombinasi rempah yang saling melengkapi rasa dan aroma.
+.</p>
+<p>Selain unik, ternyata minuman runtah atau uwuh ini mempunyai banyak khasiat juga lho:</p>
+<li>Mengatasi asam urat, Menurut sejumlah penelitian, jahe merah yang terdapat pada wedang uwuh mampu menurunkan kadar asam urat dalam darah. Selain itu, jahe merah juga bisa menurunkan rasa nyeri akibat penghambatan pada jalur siklooksigenase</li>
+<li>Menangkal radikal bebas, Menurut sebuah penelitian yang diterbitkan dalam Journal of Agriculture and Food Chemistry, serai memiliki kandungan antioksidan yang bisa mencegah radikal bebas. Antioksidan pada serai juga berperan penting untuk mencegah berbagai penyakit, seperti disfungsi sel di dalam arteri koroner.</li>
+<li>Meningkatkan kekebalan tubuh, kapulaga pada wedang uwuh mampu melawan bakteri dan patogen lainnya yang mampu membuat tubuh menjadi lebih sehat dan kuat. Selain itu, wedang uwuh juga dapat mengeluarkan racun dalam tubuh. Kandungan antioksidan pada pala, mampu mencegah dan mengobati penyakit hati dan batu ginjal.</li>
+<li>Mengobati batuk dan pilek, Gula batu dianggap mampu membantu menenangkan rongga mulut, meluruhkan lendir, dan mengurangi batuk. Selain itu, kandungan minyak atsiri dalam jahe merah juga bermanfaat untuk mengatasi batuk pada anak-anak maupun orang dewasa. Manfaat wedang uwuh ini bisa didapatkan dengan cara mengkonsumsinya secara rutin dan teratur.</li>
+      <img src="foto2.png" alt="Rempah Wedang Runtah">
+    </div>
+
+    <div id="resep" class="content">
+      <h2>Resep Wedang Runtah</h2>
+      <h3>Bahan-bahan</h3>
+      <li>Air</li>
+      <li>Jahe</li>
+      <li>Alang-alang</li>
+      <li>sereh</li>
+      <li>Gula</li>
+      <h2>Proses pembuatan </h2>
+      <li>Rebus air bersama semua bahan dengan api sedang hingga mendidih. Lakukan kurang lebih 15 menit. Angkat. </li>
+      <li>Sajikan hangat, bisa disaring atau dihidangkan bersama bahan rebusannya </li>
+      <img src="01.jpg" alt="Resep Wedang Runtah">
+      <img src="02.jpg" alt="resep wedang runtah">
+    </div>
+
+    <div id="sejarah" class="content">
+      <h2>Sejarah Wedang Runtah</h2>
+      <p>1. Asal-usul dari Tradisi Masyarakat Tegal
+
+Wedang runtah berasal dari daerah Tegal, Jawa Tengah, dan sudah dikenal sejak zaman dahulu sebagai minuman tradisional rumahan.
+Kata wedang dalam bahasa Jawa berarti minuman hangat, sedangkan runtah berarti sisa atau campuran berbagai bahan yang tersisa.
+
+Pada awalnya, wedang runtah muncul dari kebiasaan masyarakat pedesaan Tegal yang hemat dan bijak dalam memanfaatkan bahan dapur, terutama rempah-rempah. Saat membuat wedang jahe, wedang uwuh, atau minuman herbal lainnya, sering kali masih tersisa potongan kecil rempah seperti jahe, serai, kayu manis, atau cengkih. Daripada dibuang, sisa rempah itu dikumpulkan dan direbus kembali untuk menghasilkan minuman baru yang tetap beraroma wangi dan bermanfaat.
+
+Dari kebiasaan itulah muncul istilah “wedang runtah”, yang secara harfiah berarti minuman hangat dari campuran sisa rempah. Walaupun disebut “runtah”, minuman ini tidak kotor atau berasal dari bahan bekas, melainkan dari potongan rempah yang masih baik dan masih mengandung aroma serta rasa kuat.</p>
+<p>2. Perkembangan di Masyarakat
+
+Seiring waktu, wedang runtah menjadi minuman khas yang disukai banyak orang di Tegal dan sekitarnya.
+Awalnya hanya disajikan di rumah-rumah sebagai penghangat tubuh saat malam hari atau musim hujan. Namun kemudian, warung-warung tradisional dan pedagang kaki lima mulai menjual wedang runtah sebagai minuman khas daerah.
+
+Rasa hangat dan aromanya yang khas membuat wedang runtah digemari oleh berbagai kalangan — dari masyarakat pedesaan hingga perkotaan. Banyak orang menikmati minuman ini sambil berbincang santai, terutama saat cuaca dingin atau hujan.</p>
+<p>3. Filosofi dan Nilai Budaya
+
+Wedang runtah tidak hanya sekadar minuman, tetapi juga mengandung nilai filosofi dan kearifan lokal masyarakat Tegal.
+Konsep runtah mencerminkan sikap hidup hemat, bijak, dan tidak membuang yang masih berguna. Dalam budaya Jawa, hal ini mencerminkan pepatah “ora ono sing mubazir” yang berarti “tidak ada yang terbuang percuma.”
+
+Jadi, wedang runtah menggambarkan karakter masyarakat yang kreatif, sederhana, dan menghargai alam, karena mampu memanfaatkan sisa bahan menjadi sesuatu yang bermanfaat dan bernilai.</p>
+      <img src="foto1.png" alt="Sejarah Wedang Runtah">
+    </div>
+
+    <div id="kelompok" class="content">
+      <h2>Kelompok Pembuat</h2>
+      <ul>
+        <li><b>Nama Kelompok:</b> Peneliti Wedang Runtah</li>
+        <li><b>Asal Sekolah:</b> SMA N 3 Slawi</li>
+        <li><b>Anggota:</b>
+          <ul>
+            <li>Muhammad Hafis Akrom</li>
+            <li>Aldi Arpiansyah</li>
+            <li>Mohammad Abi Aroyan</li>
+            <li>M. Salman Imam</li>
+          </ul>
+        </li>
+        <li><b>Pembimbing:</b> Lutfatul Kholifah, S.T.</li>
+      </ul>
+      <!-- 🔽 Bagian Data Diri Anggota -->
+    <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:25px; margin-top:30px;">
+      
+      <div style="background:white; display:flex; align-items:center; gap:20px; padding:15px 20px; border-radius:15px; box-shadow:0 4px 10px rgba(0,0,0,0.1); width:320px;">
+        <img src="nyng.jpg" alt="Foto Hafis Akrom" style="width:90px; height:90px; border-radius:50%; object-fit:cover; border:3px solid #b3541e;">
+        <div>
+          <h3 style="margin:0; color:#b3541e;">Muhammad Hafis Akrom</h3>
+          <p style="margin:3px 0;">TTL: Tegal, 22 Mei 2008</p>
+          <p style="margin:3px 0;">Hobi: Memancing</p>
+        </div>
+      </div>
+
+      <div style="background:white; display:flex; align-items:center; gap:20px; padding:15px 20px; border-radius:15px; box-shadow:0 4px 10px rgba(0,0,0,0.1); width:320px;">
+        <img src="basir.png" alt="Foto Aldi Arpiansyah" style="width:90px; height:90px; border-radius:50%; object-fit:cover; border:3px solid #b3541e;">
+        <div>
+          <h3 style="margin:0; color:#b3541e;">Aldi Arpiansyah</h3>
+          <p style="margin:3px 0;">TTL: Tegal, 25 Januari 2007</p>
+          <p style="margin:3px 0;">Hobi: Hiking,Runing</p>
+        </div>
+      </div>
+
+      <div style="background:white; display:flex; align-items:center; gap:20px; padding:15px 20px; border-radius:15px; box-shadow:0 4px 10px rgba(0,0,0,0.1); width:320px;">
+        <img src="Abi.jpg" alt="Foto Mohammad Abi Aroyan" style="width:90px; height:90px; border-radius:50%; object-fit:cover; border:3px solid #b3541e;">
+        <div>
+          <h3 style="margin:0; color:#b3541e;">Mohammad Abi Aroyan</h3>
+          <p style="margin:3px 0;">TTL: Tegal, 28 Maret 2008</p>
+          <p style="margin:3px 0;">Hobi: Bermain sepak bola</p>
+        </div>
+      </div>
+
+      <div style="background:white; display:flex; align-items:center; gap:20px; padding:15px 20px; border-radius:15px; box-shadow:0 4px 10px rgba(0,0,0,0.1); width:320px;">
+        <img src="Salman.png" alt="Foto M. Salman Imam" style="width:90px; height:90px; border-radius:50%; object-fit:cover; border:3px solid #b3541e;">
+        <div>
+          <h3 style="margin:0; color:#b3541e;">M. Salman Imam</h3>
+          <p style="margin:3px 0;">TTL: Tegal, 16 February 2009</p>
+          <p style="margin:3px 0;">Hobi: Menggambar</p>
+        </div>
+      </div>
+
+    </div>
+      <img src="fotbar.jpg" alt="Kelompok Peneliti Wedang Runtah">
+    </div>
+
+    <div id="dokumentasi" class="content">
+      <h2>Dokumentasi Kegiatan</h2>
+      <div class="gallery">
+        <img src="4.jpg" alt="Proses Pembuatan" onclick="openPopup(this.src)">
+        <img src="10.jpg" alt="Penelitian" onclick="openPopup(this.src)">
+        <img src="11.jpg" alt="Produk Jadi" onclick="openPopup(this.src)">
+        <img src="fotbar.jpg" alt="Promosi" onclick="openPopup(this.src)">
+      </div>
+      
+      
+    </div>
+ <div id="lokasi" class="content">
+      <h2>Lokasi Wedang Runtah</h2>
+      <p>Ingin merasakan sensasi hangat, manis, dan nikmat khas Wedang Runtah asli Tegal?
+Yuk, datang langsung ke tempatnya 🌿✨</p>
+<p> disini kamu bisa:</p>
+<li>Melihat langsung proses pembuatan Wedang Runtah alami dari bahan-bahan pilihan.
+</li>
+<li>Menikmati wedang segar yang baru diseduh</li>
+<h3>📍Alamat Lengkap</h3>
+<p>Jl. HOS. Cokro Aminoto, Slawi, Slawi Wetan, Kec. Slawi, Kabupaten Tegal, Jawa Tengah 52411</p>
+      <iframe 
+        src="https://www.google.com/maps?q=-6.982564,109.143064&hl=id&z=17&output=embed" 
+        width="100%" height="400" style="border:0; border-radius:12px;" allowfullscreen="">
+      </iframe>
+      <p style="margin-top:15px;">
+        <a href="https://maps.app.goo.gl/s7GxzCSGsTncuzkL7" target="_blank" 
+           style="color:#304ffe; font-weight:600; text-decoration:none;">
+           📍 Buka di Google Maps
+        </a>
+      </p>
+      <img src="12.jpg" alt="Lokasi Pembuatan Wedang Runtah">
+    </div>
+  </section>
+
+  <div class="popup" id="popup">
+    <span onclick="closePopup()">&times;</span>
+    <img id="popupImg" src="">
+  </div>
+
+  <script>
+   
+    function showPage(pageId) {
+      document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
+      document.getElementById(pageId).classList.add('active');
+    }
+
+    function openPopup(src) {
+      document.getElementById('popup').classList.add('active');
+      document.getElementById('popupImg').src = src;
+    }
+
+    function closePopup() {
+      document.getElementById('popup').classList.remove('active');
+    }
+
+    document.getElementById('popup').addEventListener('click', function(e) {
+      if (e.target === this) closePopup();
+    });
+  </script>
+
+</body>
+</html>
